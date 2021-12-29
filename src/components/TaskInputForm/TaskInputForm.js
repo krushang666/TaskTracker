@@ -20,7 +20,7 @@ const TaskInputForm = (props) => {
     setuserInput((prevState) => {
       return {
         ...prevState,
-        date: new Date(e.target.value),
+        date: e.target.value,
       };
     });
   };
@@ -34,7 +34,13 @@ const TaskInputForm = (props) => {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    props.onNewTask(userInput);
+    const data={
+      title:userInput.title,
+      date:new Date(userInput.date),
+      time:userInput.time
+    }
+    console.log(data);
+    props.onNewTask(data);
     setuserInput({
       title: "",
       date: "",

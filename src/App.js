@@ -31,10 +31,8 @@ function App() {
       })
       .then((success) => {
         alert(success.data);
+        fetchTasks();
       });
-    settasks((prevState) => {
-      return [...prevState, data];
-    });
     setshowForm(false);
   };
 
@@ -112,8 +110,8 @@ function App() {
   const onDeleteTaskHandler = async (id) => {
     await axios.get(`${baseUrl}deleteTask/${id}`).then((data) => {
       alert(data["data"]);
+      fetchTasks();
     });
-    settasks(tasks.filter((task) => task._id !== id));
   };
 
   // Hides Add Button
