@@ -37,11 +37,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
-  },
-  "devDependencies": {
-    "react-app-rewired-esbuild": "0.0.9"
-=======
->>>>>>> 97c394d75dd40f54a33e57b1d72a6363057597c2
   }
 }
