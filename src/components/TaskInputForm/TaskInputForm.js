@@ -56,7 +56,6 @@ const TaskInputForm = (props) => {
               <label>Task Name</label>
               <input
                 type="text"
-                value={userInput.title}
                 placeholder="Enter Task Name"
                 onChange={taskTitleHandler}
                 className="form-control"
@@ -69,7 +68,6 @@ const TaskInputForm = (props) => {
               <label>Date</label>
               <input
                 type="date"
-                value={userInput.date}
                 className="form-control"
                 onChange={taskDateHandler}
               />
@@ -81,7 +79,6 @@ const TaskInputForm = (props) => {
               <label>Time</label>
               <input
                 type="time"
-                value={userInput.time}
                 className="form-control"
                 onChange={taskTimeHandler}
               />
