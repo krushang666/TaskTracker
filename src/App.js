@@ -7,9 +7,11 @@ import Tasks from "./components/Tasks/Tasks";
 import { About } from "./components/About/About";
 import Login from "./components/Login/Login";
 import AuthContext from "./components/storage/auth-context";
+import axios from "axios";
 function App() {
   // Useful Variables!!
-
+  
+  const baseUrl = "http://localhost:3300/Task/";
   const ctx = useContext(AuthContext);
   const [showForm, setshowForm] = useState(false);
   const [tasks, settasks] = useState([]);
@@ -25,28 +27,17 @@ function App() {
         alert(success.data);
         fetchTasks();
       });
-    const res = await fetch(`http://localhost:3301/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const receivedData = await res.json();
-    settasks((prevState) => {
-      return [...prevState, receivedData];
-    });
     setshowForm(false);
   };
 
   //j Tasks from dummy database
-
+  const fetchTasks = async () => {
+    await axios.get(`${baseUrl}`).then((success) => {
+      settasks(success.data);
+    });
+  };
   useEffect(() => {
-    const fetchTasks = async () => {
-      const res = await fetch("http://localhost:3301/tasks");
-      const data = await res.json();
-      settasks(data);
-    };
+    
     fetchTasks();
   }, []);
 
@@ -67,18 +58,20 @@ function App() {
   // Delete Tasks
 
   const onDeleteTaskHandler = async (id) => {
-
+    alert("works");
     await axios.get(`${baseUrl}deleteTask/${id}`).then((data) => {
       alert(data["data"]);
       fetchTasks();
     });
-
-    await fetch(`http://localhost:3301/tasks/${id}`, {
-      method: "DELETE",
-    });
-    settasks(tasks.filter((task) => task.id !== id));
-
   };
+
+
+  const onUpdateTaskHandler=async(id)=>{
+    await axios.get(`${baseUrl}fetchFromId/${id}`).then((data) => {
+      alert(data["data"]);
+     // fetchTasks();
+    });
+  }
 
   // Hides Add Button
 
@@ -94,7 +87,7 @@ function App() {
       <>
         {displayForm}
         {tasks.length !== 0 ? (
-          <Tasks tasks={tasks} onDeleteTask={onDeleteTaskHandler}></Tasks>
+          <Tasks tasks={tasks} onUpdateTask={onUpdateTaskHandler} onDeleteTask={onDeleteTaskHandler}></Tasks>
         ) : (
           <h1>No Data To Show!!</h1>
         )}

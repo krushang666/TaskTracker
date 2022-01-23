@@ -2,9 +2,16 @@ import React from "react";
 import "../bootstrap.css";
 import "../style.css";
 
+
+/*
+  this componant covers the independent task which is display in proper format 
+  and task update delete events fires from here */
 const Task = (props) => {
   const DeleteTaskHandler = () => {
     props.DeleteTask(props.id);
+  };
+  const UpdateTaskHandler = () => {
+    props.UpdateTask(props.id);
   };
   const newDate = new Date(props.date);
   const date =
@@ -26,6 +33,14 @@ const Task = (props) => {
             <label>{props.time}</label>
           </div>
           <div className="col-6 text-right">
+            <button
+              className="btn btn-success"
+              onClick={UpdateTaskHandler}
+              type="button"
+            >
+              Update
+            </button>
+            &nbsp;&nbsp;
             <button
               className="btn btn-danger"
               onClick={DeleteTaskHandler}
