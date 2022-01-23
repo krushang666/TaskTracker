@@ -6,9 +6,9 @@ const Task = (props) => {
   const DeleteTaskHandler = () => {
     props.DeleteTask(props.id);
   };
-  const UpdateTaskHandler = () =>{
+  const UpdateTaskHandler = () => {
     props.UpdateTask(props.id);
-  }
+  };
   const newDate = new Date(props.date);
   const date =
     newDate.toLocaleString("en-US", { day: "2-digit" }) +
@@ -16,6 +16,7 @@ const Task = (props) => {
     newDate.toLocaleString("en-US", { month: "short" }) +
     " " +
     newDate.getFullYear();
+
   return (
     <div className={`card m-md-3 text-white ${props.class}`}>
       <div className="card-body">
@@ -28,13 +29,14 @@ const Task = (props) => {
             <label>{props.time}</label>
           </div>
           <div className="col-6 text-right">
-          <button
+            <button
               className="btn btn-success"
               onClick={UpdateTaskHandler}
               type="button"
             >
               Update
-            </button>&nbsp;&nbsp;
+            </button>
+            &nbsp;&nbsp;
             <button
               className="btn btn-danger"
               onClick={DeleteTaskHandler}
